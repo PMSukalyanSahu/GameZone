@@ -216,6 +216,8 @@ function renderGame(){
     renderPiece();
 }
 
+
+
 document.addEventListener("keydown",function(e){
     let key = e.key;
     if(key == "ArrowDown"){
@@ -227,4 +229,20 @@ document.addEventListener("keydown",function(e){
     }else if(key == "ArrowUp"){
         rotate();
     }
+})
+
+
+//Sahu: script.js — add this after your other listeners
+document.getElementById('start-button').addEventListener('click', () => {
+  // reset core state, same as on game over
+  grid = generateGrid();        // fresh empty grid
+  score = 0;                    // reset score
+  fallingPieceObj = null;       // force a new random piece in next tick
+  scoreboard.innerHTML = "Score: " + score;
+
+  // optional: clear the canvas immediately
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // redraw the empty board
+  renderGame();
 })
