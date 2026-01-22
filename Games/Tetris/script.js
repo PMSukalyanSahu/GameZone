@@ -59,7 +59,7 @@ let grid = generateGrid();
 let fallingPieceObj = null;
 let score = 0;
 
-setInterval(newGameState,500);
+setInterval(newGameState,1200);
 function newGameState(){
     checkGrid();
     if(!fallingPieceObj){
@@ -246,3 +246,30 @@ document.getElementById('start-button').addEventListener('click', () => {
   // redraw the empty board
   renderGame();
 })
+
+document.addEventListener('DOMContentLoaded', () => {
+    const levelButtons = document.querySelectorAll('#level-selector button');
+    levelButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            levelButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        });
+    });
+});
+
+let gameInterval; // Variable to store the interval ID
+
+document.getElementById('easy-button').addEventListener('click', function() {
+    clearInterval(gameInterval); // Clear any existing interval
+    gameInterval = setInterval(newGameState, 1200); // Set new interval for easy level
+});
+
+document.getElementById('medium-button').addEventListener('click', function() {
+    clearInterval(gameInterval); // Clear any existing interval
+    gameInterval = setInterval(newGameState, 900); // Set new interval for medium level   
+});
+
+document.getElementById('difficult-button').addEventListener('click', function() {
+    clearInterval(gameInterval); // Clear any existing interval
+    gameInterval = setInterval(newGameState, 100); // Set new interval for difficult level 
+});
